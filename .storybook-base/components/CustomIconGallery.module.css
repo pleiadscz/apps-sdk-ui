@@ -4,6 +4,7 @@
   padding-top: 14px;
   margin-top: -10px;
   background: var(--color-surface);
+  z-index: 10;
 }
 
 .Container {
@@ -52,4 +53,123 @@
 
 .SearchTerm {
   font-weight: var(--font-weight-semibold);
+}
+
+.IconGallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.IconItemContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 12px;
+  border-radius: var(--radius-md);
+
+  &:hover {
+    background-color: var(--alpha-5);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.IconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--alpha-15);
+    background-color: var(--alpha-5);
+  }
+}
+
+.IconWrapper.Copied {
+  border-color: var(--color-text-success, #10b981);
+  background-color: var(--alpha-10);
+}
+
+.IconDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.IconLarge {
+  width: 48px;
+  height: 48px;
+  font-size: 48px;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.IconItemContainer:hover .IconLarge {
+  transform: scale(1.15);
+}
+
+.IconName {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-align: center;
+  word-break: break-word;
+  max-width: 100%;
+  transition: color 0.2s ease;
+}
+
+.IconItemContainer:hover .IconName {
+  color: var(--color-text-primary);
+}
+
+.CopyNotification {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-text-primary);
+  color: var(--color-surface);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: fadeInOut 2s ease-in-out forwards;
+  z-index: 20;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
 }
