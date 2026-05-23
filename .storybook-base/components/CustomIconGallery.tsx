@@ -1,5 +1,5 @@
 import { Unstyled } from "@storybook/blocks"
-import { useMemo, useState, useRef, useEffect } from "react"
+import { useMemo, useState } from "react"
 import { EmptyMessage } from "../../src/components/EmptyMessage"
 import * as Icons from "../../src/components/Icon"
 import { copyToClipboard } from "../../src/lib/copyToClipboard"
@@ -7,7 +7,6 @@ import s from "./CustomIconGallery.module.css"
 
 export const CustomIconGallery = () => {
   const [search, setSearch] = useState<string>("")
-  const [copiedIcon, setCopiedIcon] = useState<string | null>(null)
   const iconListMemo = useMemo(
     () =>
       Object.entries(Icons).filter(([name]) =>
@@ -18,29 +17,14 @@ export const CustomIconGallery = () => {
 
   const handleCopyIcon = async (iconName: string, IconComponent: any) => {
     try {
-      // Create a temporary SVG container to extract the SVG code
-      const tempDiv = document.createElement("div")
-      tempDiv.style.position = "absolute"
-      tempDiv.style.visibility = "hidden"
-      tempDiv.style.width = "24px"
-      tempDiv.style.height = "24px"
-      document.body.appendChild(tempDiv)
-
       // Render the icon and get the SVG element
       const iconElement = IconComponent({ width: "24", height: "24" })
       
-      // Convert React element to string by rendering it
+      // Convert React element to string
       const svgString = getSvgStringFromElement(iconElement)
       
       // Copy to clipboard
-      const success = await copyToClipboard(svgString)
-      
-      if (success) {
-        setCopiedIcon(iconName)
-        setTimeout(() => setCopiedIcon(null), 2000)
-      }
-
-      document.body.removeChild(tempDiv)
+      await copyToClipboard(svgString)
     } catch (error) {
       console.error("Failed to copy icon:", error)
     }
@@ -48,28 +32,21 @@ export const CustomIconGallery = () => {
 
   const getSvgStringFromElement = (element: any): string => {
     try {
-      // Extract SVG properties from React element
       const props = element.props || {}
       const children = props.children || []
       
-      // Build SVG string with proper attributes
       let svgAttrs = `width="${props.width || "24"}" height="${props.height || "24"}" viewBox="${props.viewBox || "0 0 24 24"}" fill="${props.fill || "currentColor"}"`
-      
       let svgString = `<svg ${svgAttrs} xmlns="http://www.w3.org/2000/svg">`
       
-      // Process children (path elements)
       const processChildren = (child: any) => {
         if (!child) return ""
-        
         if (child.type === "path") {
           const pathProps = child.props || {}
           return `<path d="${pathProps.d}" fill="${pathProps.fill || "currentColor"}"/>`
         }
-        
         if (Array.isArray(child)) {
           return child.map(processChildren).join("")
         }
-        
         return ""
       }
       
@@ -118,13 +95,10 @@ export const CustomIconGallery = () => {
               onClick={() => handleCopyIcon(name, Icon)}
               title={`Click to copy SVG code for ${name}`}
             >
-              <div className={`${s.IconWrapper} ${copiedIcon === name ? s.Copied : ""}`}>
+              <div className={s.IconWrapper}>
                 <div className={s.IconDisplay}>
                   <Icon className={s.IconLarge} />
                 </div>
-                {copiedIcon === name && (
-                  <div className={s.CopyNotification}>Copied!</div>
-                )}
               </div>
               <div className={s.IconName}>{name}</div>
             </div>

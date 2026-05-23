@@ -99,11 +99,6 @@
   }
 }
 
-.IconWrapper.Copied {
-  border-color: var(--color-text-success, #10b981);
-  background-color: var(--alpha-10);
-}
-
 .IconDisplay {
   display: flex;
   align-items: center;
@@ -136,40 +131,4 @@
 
 .IconItemContainer:hover .IconName {
   color: var(--color-text-primary);
-}
-
-.CopyNotification {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-text-primary);
-  color: var(--color-surface);
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 11px;
-  font-weight: 600;
-  white-space: nowrap;
-  pointer-events: none;
-  animation: fadeInOut 2s ease-in-out forwards;
-  z-index: 20;
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-  }
-  20% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  80% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-  }
 }
