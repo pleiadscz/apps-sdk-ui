@@ -20,18 +20,12 @@
   margin: 0 0 24px;
   background: var(--color-surface);
   font-size: 15px;
-  transition: border-color 0.15s ease;
 
   &::placeholder {
     color: var(--color-text-tertiary);
   }
 
-  &:hover {
-    border-color: var(--alpha-15);
-  }
-
   &:focus {
-    border-color: var(--alpha-20);
     outline: 0;
   }
 }
@@ -68,17 +62,11 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
   padding: 12px;
   border-radius: var(--radius-md);
 
   &:hover {
     background-color: var(--alpha-5);
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
   }
 }
 
@@ -91,12 +79,6 @@
   height: 80px;
   border: 2px solid transparent;
   border-radius: var(--radius-md);
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: var(--alpha-15);
-    background-color: var(--alpha-5);
-  }
 }
 
 .IconDisplay {
@@ -111,12 +93,7 @@
   width: 48px;
   height: 48px;
   font-size: 48px;
-  transition: transform 0.2s ease;
   flex-shrink: 0;
-}
-
-.IconItemContainer:hover .IconLarge {
-  transform: scale(1.15);
 }
 
 .IconName {
@@ -126,7 +103,6 @@
   text-align: center;
   word-break: break-word;
   max-width: 100%;
-  transition: color 0.2s ease;
 }
 
 .IconItemContainer:hover .IconName {
